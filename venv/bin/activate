@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/moni/Prework/flask_work/phonebook_app/venv"
+VIRTUAL_ENV="/Users/moni/Prework/flask_work/drone_inventory/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

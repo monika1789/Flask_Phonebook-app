@@ -3,12 +3,12 @@ import secrets
 from flask import request, jsonify, json
 import decimal
 
-from models import User
+from models import User #, and also whatever the other class name ends up as
 
 def token_required(our_flask_function):
     @wraps(our_flask_function)
     def decorated(*args, **kwargs):
-        taken = None
+        token = None
 
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token'].split(' ')[1]
@@ -27,10 +27,9 @@ def token_required(our_flask_function):
         return our_flask_function(current_user_token, *args, **kwargs)
     return decorated
 
-
-class JSONEncoder (json.JSONEncoder):
-    def default (self, obj):
+class JSONEncoder(json.JSONEncoder):
+    def default(self, obj):
         if isinstance(obj, decimal.Decimal):
+            #Convert decimal instances into strings
             return str(obj)
-        return super (JSONEncoder,self).default(obj)
-            
+        return super(JSONEncoder,self).default(obj)

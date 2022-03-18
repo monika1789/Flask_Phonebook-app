@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 # imports for flask login 
 from flask_login import login_user, logout_user, LoginManager, current_user, login_required
 
-auth = Blueprint('auth', __name__, template_folder = 'auth_templates')
+auth = Blueprint('auth', __name__, template_folder='auth_templates')
 
 @auth.route('/signup', methods = ['GET', 'POST'])
 def signup():
@@ -28,7 +28,11 @@ def signup():
             return redirect(url_for('site.home'))
     except:
         raise Exception('Invalid form data: Please check your form')
-    return render_template('sign_up.html', form=form)      
+    return render_template('sign_up.html', form=form)
+
+
+
+
 
 @auth.route('/signin', methods = ['GET', 'POST'])
 def signin():
@@ -46,7 +50,7 @@ def signin():
                 flash('You were successful in your initiation. Congratulations, and welcome to the Jedi Knights', 'auth-sucess')
                 return redirect(url_for('site.profile'))
             else:
-                flash('You do not have access to this content.', 'auth-failed')
+                flash('You have failed in your attempt to access this content', 'auth-failed')
                 return redirect(url_for('auth.signin'))
     except:
         raise Exception('Invalid Form Data: Please Check your Form')
@@ -55,4 +59,4 @@ def signin():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('site.home'))      
+    return redirect(url_for('site.home'))
